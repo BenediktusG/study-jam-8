@@ -19,3 +19,12 @@ export const deleteItem = (id) => {
 };
 
 // TODO: update item service
+export const updateItem = (id, data) => {
+  const index = items.findIndex((item) => item.id === id);
+  if (index === -1) return null;
+  items[index] = {
+    id,
+    ...data,
+  };
+  return items[index];
+};

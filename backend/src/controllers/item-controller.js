@@ -7,6 +7,7 @@ export const getAllItems = (req, res) => {
 export const getItem = (req, res) => {
   const item = itemService.getItemById(Number(req.params.id));
   if (!item) return res.status(404).json({ message: "Item not found" });
+  res.set("Cache-Control", "public, max-age=60");
   res.json(item);
 };
 
@@ -26,3 +27,15 @@ export const deleteItem = (req, res) => {
 };
 
 // TODO: Update item controller
+export const updateItem = (req, res) => {
+  const { name, quantity } = req.body;
+  const updatedItem = itemService.updateItem(Number(req.params.id), {
+    name,
+    quantity,
+  });
+  if (!updatedItem)
+    return res.status(404).json({
+      message: "Item not found",
+    });
+  res.json(updatedItem);
+};

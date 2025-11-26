@@ -9,5 +9,6 @@ router.post("/", itemController.createItem);
 router.delete("/:id", itemController.deleteItem);
 
 // TODO: update item route
+router.put("/:id", itemController.updateItem);
 
 export default router;
